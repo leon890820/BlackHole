@@ -8,9 +8,11 @@ public class ContainerVis : MonoBehaviour {
     public bool displayOutline = true;
 
     void OnDrawGizmosSelected() {
-        if (displayOutline) {
-            Gizmos.color = colour;
-            Gizmos.DrawWireCube(transform.position, transform.localScale);
-        }
+        if (!displayOutline) return;
+
+        Gizmos.color = colour;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+        Gizmos.matrix = Matrix4x4.identity;
     }
 }
